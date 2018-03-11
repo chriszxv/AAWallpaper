@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Device View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="DeviceViewController" customModule="AAWallpaper" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Evh-Nx-cw2"/>
+                        <viewControllerLayoutGuide type="bottom" id="eIm-LV-C7i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="qiD-gf-tkl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Dyr-L8-WeP">
+                                <rect key="frame" x="10" y="301.5" width="355" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Model" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6xw-mA-dxP">
+                                <rect key="frame" x="10" y="359.5" width="355" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SCj-E8-0ob">
+                                <rect key="frame" x="10" y="417.5" width="355" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qiD-gf-tkl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="07e-Zm-UHy"/>
+                            <constraint firstItem="6xw-mA-dxP" firstAttribute="top" secondItem="Dyr-L8-WeP" secondAttribute="bottom" constant="10" id="KKJ-fT-5AT"/>
+                            <constraint firstItem="SCj-E8-0ob" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="MqZ-7B-P52"/>
+                            <constraint firstItem="SCj-E8-0ob" firstAttribute="top" secondItem="6xw-mA-dxP" secondAttribute="bottom" constant="10" id="OLY-rd-CAA"/>
+                            <constraint firstItem="qiD-gf-tkl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="VWJ-sg-peG"/>
+                            <constraint firstAttribute="bottom" secondItem="qiD-gf-tkl" secondAttribute="bottom" id="XE7-bO-sQf"/>
+                            <constraint firstItem="6xw-mA-dxP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="cmb-Lj-oDE"/>
+                            <constraint firstAttribute="trailing" secondItem="6xw-mA-dxP" secondAttribute="trailing" constant="10" id="ddX-1R-MrT"/>
+                            <constraint firstAttribute="trailing" secondItem="Dyr-L8-WeP" secondAttribute="trailing" constant="10" id="lOl-wC-DG6"/>
+                            <constraint firstItem="6xw-mA-dxP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="50" id="ozF-cB-Lg8"/>
+                            <constraint firstAttribute="trailing" secondItem="qiD-gf-tkl" secondAttribute="trailing" id="tg7-SW-zPR"/>
+                            <constraint firstAttribute="trailing" secondItem="SCj-E8-0ob" secondAttribute="trailing" constant="10" id="wHM-BE-ogp"/>
+                            <constraint firstItem="Dyr-L8-WeP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="zhK-pM-dv1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deviceModelLabel" destination="6xw-mA-dxP" id="fMk-aw-qUB"/>
+                        <outlet property="nameLabel" destination="Dyr-L8-WeP" id="cl1-sv-TTy"/>
+                        <outlet property="systemVersionLabel" destination="SCj-E8-0ob" id="FIO-tF-Aqi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background" width="1200" height="1020"/>
+    </resources>
+</document>

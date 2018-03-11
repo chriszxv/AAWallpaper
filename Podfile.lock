@@ -1,0 +1,24 @@
+PODS:
+  - DeviceKit (1.4.0)
+  - RxCocoa (4.1.1):
+    - RxSwift (~> 4.0)
+  - RxGesture (1.2.1):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.1)
+
+DEPENDENCIES:
+  - DeviceKit (~> 1.4.0)
+  - RxCocoa (~> 4.1.1)
+  - RxGesture
+  - RxSwift (~> 4.1.1)
+
+SPEC CHECKSUMS:
+  DeviceKit: fa74d97499660e88081718b16688e19217595dba
+  RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
+  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
+  RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
+
+PODFILE CHECKSUM: f777264ee164d4207e21ee6d0e421a26f0fbd123
+
+COCOAPODS: 1.4.0

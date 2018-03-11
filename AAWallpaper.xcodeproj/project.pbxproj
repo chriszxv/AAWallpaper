@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		657368A5F4765AFA89979B78 /* Pods_AAWallpaper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19DDE96473F6D4E29EA3DB62 /* Pods_AAWallpaper.framework */; };
+		DCAC35C6200DAD9700CC074C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC35C5200DAD9700CC074C /* AppDelegate.swift */; };
+		DCAC35C8200DAD9700CC074C /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC35C7200DAD9700CC074C /* DeviceViewController.swift */; };
+		DCAC35CB200DAD9700CC074C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCAC35C9200DAD9700CC074C /* Main.storyboard */; };
+		DCAC35CD200DAD9700CC074C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCAC35CC200DAD9700CC074C /* Assets.xcassets */; };
+		DCAC35D0200DAD9700CC074C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCAC35CE200DAD9700CC074C /* LaunchScreen.storyboard */; };
+		DCAC35D8200DC44B00CC074C /* DeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC35D7200DC44B00CC074C /* DeviceViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		19DDE96473F6D4E29EA3DB62 /* Pods_AAWallpaper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AAWallpaper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A670230A19B087E980BB343 /* Pods-AAWallpaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AAWallpaper.release.xcconfig"; path = "Pods/Target Support Files/Pods-AAWallpaper/Pods-AAWallpaper.release.xcconfig"; sourceTree = "<group>"; };
+		D5A05C3798BBDA3A3943BB5A /* Pods-AAWallpaper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AAWallpaper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AAWallpaper/Pods-AAWallpaper.debug.xcconfig"; sourceTree = "<group>"; };
+		DCAC35C2200DAD9700CC074C /* AAWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCAC35C5200DAD9700CC074C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DCAC35C7200DAD9700CC074C /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
+		DCAC35CA200DAD9700CC074C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DCAC35CC200DAD9700CC074C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DCAC35CF200DAD9700CC074C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DCAC35D1200DAD9700CC074C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCAC35D7200DC44B00CC074C /* DeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCAC35BF200DAD9700CC074C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				657368A5F4765AFA89979B78 /* Pods_AAWallpaper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		82AC8FA9FDDA112D66242621 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19DDE96473F6D4E29EA3DB62 /* Pods_AAWallpaper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		86243F3253BC418BAA7996CC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D5A05C3798BBDA3A3943BB5A /* Pods-AAWallpaper.debug.xcconfig */,
+				2A670230A19B087E980BB343 /* Pods-AAWallpaper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DCAC35B9200DAD9600CC074C = {
+			isa = PBXGroup;
+			children = (
+				DCAC35C4200DAD9700CC074C /* AAWallpaper */,
+				DCAC35C3200DAD9700CC074C /* Products */,
+				86243F3253BC418BAA7996CC /* Pods */,
+				82AC8FA9FDDA112D66242621 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DCAC35C3200DAD9700CC074C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCAC35C2200DAD9700CC074C /* AAWallpaper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCAC35C4200DAD9700CC074C /* AAWallpaper */ = {
+			isa = PBXGroup;
+			children = (
+				DCAC35C5200DAD9700CC074C /* AppDelegate.swift */,
+				DCAC35C7200DAD9700CC074C /* DeviceViewController.swift */,
+				DCAC35D7200DC44B00CC074C /* DeviceViewModel.swift */,
+				DCAC35C9200DAD9700CC074C /* Main.storyboard */,
+				DCAC35CC200DAD9700CC074C /* Assets.xcassets */,
+				DCAC35CE200DAD9700CC074C /* LaunchScreen.storyboard */,
+				DCAC35D1200DAD9700CC074C /* Info.plist */,
+			);
+			path = AAWallpaper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCAC35C1200DAD9700CC074C /* AAWallpaper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCAC35D4200DAD9700CC074C /* Build configuration list for PBXNativeTarget "AAWallpaper" */;
+			buildPhases = (
+				18D1643DAE0740978CF691C9 /* [CP] Check Pods Manifest.lock */,
+				DCAC35BE200DAD9700CC074C /* Sources */,
+				DCAC35BF200DAD9700CC074C /* Frameworks */,
+				DCAC35C0200DAD9700CC074C /* Resources */,
+				56EC022F7FCB381D01409B74 /* [CP] Embed Pods Frameworks */,
+				BBF4DAA795A57DC3C9B36265 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AAWallpaper;
+			productName = AAWallpaper;
+			productReference = DCAC35C2200DAD9700CC074C /* AAWallpaper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCAC35BA200DAD9600CC074C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = AAStocks;
+				TargetAttributes = {
+					DCAC35C1200DAD9700CC074C = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = DCAC35BD200DAD9600CC074C /* Build configuration list for PBXProject "AAWallpaper" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCAC35B9200DAD9600CC074C;
+			productRefGroup = DCAC35C3200DAD9700CC074C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCAC35C1200DAD9700CC074C /* AAWallpaper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCAC35C0200DAD9700CC074C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCAC35D0200DAD9700CC074C /* LaunchScreen.storyboard in Resources */,
+				DCAC35CD200DAD9700CC074C /* Assets.xcassets in Resources */,
+				DCAC35CB200DAD9700CC074C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18D1643DAE0740978CF691C9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AAWallpaper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56EC022F7FCB381D01409B74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AAWallpaper/Pods-AAWallpaper-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AAWallpaper/Pods-AAWallpaper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBF4DAA795A57DC3C9B36265 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AAWallpaper/Pods-AAWallpaper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCAC35BE200DAD9700CC074C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCAC35D8200DC44B00CC074C /* DeviceViewModel.swift in Sources */,
+				DCAC35C8200DAD9700CC074C /* DeviceViewController.swift in Sources */,
+				DCAC35C6200DAD9700CC074C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DCAC35C9200DAD9700CC074C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCAC35CA200DAD9700CC074C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DCAC35CE200DAD9700CC074C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCAC35CF200DAD9700CC074C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DCAC35D2200DAD9700CC074C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCAC35D3200DAD9700CC074C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCAC35D5200DAD9700CC074C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5A05C3798BBDA3A3943BB5A /* Pods-AAWallpaper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3MGM277Z8U;
+				INFOPLIST_FILE = AAWallpaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aastocks.wallpaper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCAC35D6200DAD9700CC074C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A670230A19B087E980BB343 /* Pods-AAWallpaper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3MGM277Z8U;
+				INFOPLIST_FILE = AAWallpaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aastocks.wallpaper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCAC35BD200DAD9600CC074C /* Build configuration list for PBXProject "AAWallpaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCAC35D2200DAD9700CC074C /* Debug */,
+				DCAC35D3200DAD9700CC074C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCAC35D4200DAD9700CC074C /* Build configuration list for PBXNativeTarget "AAWallpaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCAC35D5200DAD9700CC074C /* Debug */,
+				DCAC35D6200DAD9700CC074C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCAC35BA200DAD9600CC074C /* Project object */;
+}
