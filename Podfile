@@ -8,7 +8,7 @@ target 'AAWallpaper' do
   # Pods for AAWallpaper
   pod 'RxSwift', '~> 4.1.1'
   pod 'RxCocoa', '~> 4.1.1'
-  pod 'RxGesture' '~> 1.2.1'
+  pod 'RxGesture', '~> 1.2.1'
   pod 'DeviceKit', '~> 1.4.0'
 
 end
