@@ -10,7 +10,7 @@ PODS:
 DEPENDENCIES:
   - DeviceKit (~> 1.4.0)
   - RxCocoa (~> 4.1.1)
-  - RxGesture
+  - RxGesture (~> 1.2.1)
   - RxSwift (~> 4.1.1)
 
 SPEC CHECKSUMS:
@@ -19,6 +19,6 @@ SPEC CHECKSUMS:
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
 
-PODFILE CHECKSUM: f777264ee164d4207e21ee6d0e421a26f0fbd123
+PODFILE CHECKSUM: 72e82990a49edb6b3485ad8c89b1e53fd79f2e7d
 
 COCOAPODS: 1.4.0
