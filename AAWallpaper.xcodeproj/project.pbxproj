@@ -103,7 +103,6 @@
 				DCAC35BF200DAD9700CC074C /* Frameworks */,
 				DCAC35C0200DAD9700CC074C /* Resources */,
 				56EC022F7FCB381D01409B74 /* [CP] Embed Pods Frameworks */,
-				BBF4DAA795A57DC3C9B36265 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,21 +201,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AAWallpaper/Pods-AAWallpaper-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BBF4DAA795A57DC3C9B36265 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AAWallpaper/Pods-AAWallpaper-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

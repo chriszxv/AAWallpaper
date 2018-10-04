@@ -1,24 +1,31 @@
 PODS:
-  - DeviceKit (1.4.0)
-  - RxCocoa (4.1.1):
+  - DeviceKit (1.8.1)
+  - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
   - RxGesture (1.2.1):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.1.1)
+  - RxSwift (4.1.2)
 
 DEPENDENCIES:
-  - DeviceKit (~> 1.4.0)
-  - RxCocoa (~> 4.1.1)
+  - DeviceKit
+  - RxCocoa (~> 4.1.2)
   - RxGesture (~> 1.2.1)
-  - RxSwift (~> 4.1.1)
+  - RxSwift (~> 4.1.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - DeviceKit
+    - RxCocoa
+    - RxGesture
+    - RxSwift
 
 SPEC CHECKSUMS:
-  DeviceKit: fa74d97499660e88081718b16688e19217595dba
-  RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
+  DeviceKit: eb29be542f5473b46b1c719011cf7de3ec5264ca
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
-  RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
 
-PODFILE CHECKSUM: 72e82990a49edb6b3485ad8c89b1e53fd79f2e7d
+PODFILE CHECKSUM: aa871ff8afcf58f81339fe6f9c78542e6403ff83
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

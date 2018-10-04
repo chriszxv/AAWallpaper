@@ -6,9 +6,9 @@ target 'AAWallpaper' do
   use_frameworks!
 
   # Pods for AAWallpaper
-  pod 'RxSwift', '~> 4.1.1'
-  pod 'RxCocoa', '~> 4.1.1'
+  pod 'RxSwift', '~> 4.1.2'
+  pod 'RxCocoa', '~> 4.1.2'
   pod 'RxGesture', '~> 1.2.1'
-  pod 'DeviceKit', '~> 1.4.0'
+  pod 'DeviceKit', '~> 1.8.1'
 
 end
