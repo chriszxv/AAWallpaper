@@ -8,19 +8,17 @@
 
 import DeviceKit
 import RxSwift
+import RxCocoa
 
 struct DeviceViewModel {
-        
-    var name = Variable<String>("")
-    var model = Variable<String>("")
-    var system = Variable<String>("")
-    
+    var name = BehaviorRelay<String>(value: "")
+    var model = BehaviorRelay<String>(value: "")
+    var system = BehaviorRelay<String>(value: "")
+
     init() {
-        let device = Device()
-        self.name.value = device.name;
-        self.model.value = device.description;
-        self.system.value = "\(device.systemName) \(device.systemVersion)"
+        let device = Device.current
+        name.accept(device.name ?? "iPhone")
+        model.accept(device.description)
+        system.accept("\(device.systemName ?? "iOS") \(device.systemVersion ?? "")")
     }
-
 }
-
