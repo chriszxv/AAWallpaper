@@ -11,10 +11,10 @@ PODS:
   - RxSwift (5.0.1)
 
 DEPENDENCIES:
-  - DeviceKit
-  - RxCocoa
-  - RxGesture
-  - RxSwift
+  - DeviceKit (= 2.3.0)
+  - RxCocoa (= 5.0.1)
+  - RxGesture (= 3.0.1)
+  - RxSwift (= 5.0.1)
 
 SPEC REPOS:
   trunk:
@@ -31,6 +31,6 @@ SPEC CHECKSUMS:
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
 
-PODFILE CHECKSUM: b883b662928a1636e5f506b2b3c9263ae9f99916
+PODFILE CHECKSUM: 7a89b0554614b9d87811965e7a05d8c0d0a43ac0
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.1
