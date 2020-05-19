@@ -25,9 +25,8 @@ variables:
     GIT_STRATEGY: fetch
     GIT_SUBMODULE_STRATEGY: recursive
 
-# before_script:
-#     - git submodule sync --recursive
-#     - git submodule update --init --recursive
+before_script:
+    - bundle install
 
 build_beta_uat_ipa:
     stage: build_beta_uat
