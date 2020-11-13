@@ -1,8 +1,0 @@
-app_identifier("com.aastock.KGCL") # The bundle identifier of your app
-apple_id("tommy.lam@aastocks.com") # Your Apple email address
-
-itc_team_id("118744697") # App Store Connect Team ID
-team_id("3YLWQT4DUN") # Developer Portal Team ID
-
-# For more information about the Appfile, see:
-#     https://docs.fastlane.tools/advanced/#appfile

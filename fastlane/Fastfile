@@ -25,6 +25,7 @@ desc "#### Options"
 desc "* **`code`**: Project Code for any lane options config in config.json."
 desc "---"
 lane :get_config do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 
 	# if code == "build"
@@ -53,6 +54,7 @@ desc "#### Options"
 desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode."
 desc "---"
 lane :generate_export_method do |options|
+	puts "-options: #{options}"
 	export_method = options[:export_method]
 
 	if export_method == "adhoc"
@@ -77,6 +79,7 @@ desc "#### Options"
 desc "* **`code`**: Project Code for any lane options config in config.json."
 desc "---"
 lane :bump_build_number do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	config = get_config(code: code)
 
@@ -100,6 +103,7 @@ desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore`
 desc "* **`env`**: last name component."
 desc "---"
 lane :generate_build_name do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
 	env = options[:env]
@@ -111,8 +115,11 @@ lane :generate_build_name do |options|
 	puts "-xcodeproj: #{xcodeproj}"
 	puts "-app_name: #{app_name}"
 
-	version = get_version_number(xcodeproj: xcodeproj)
-	build_number = get_build_number(xcodeproj: xcodeproj)
+	version = get_version_number(
+		xcodeproj: xcodeproj,
+		target: app_name
+	)
+		build_number = get_build_number(xcodeproj: xcodeproj)
 
 	build_name = "#{app_name}.v#{version}.b#{build_number}.#{export_method}.#{env}.ipa"
 
@@ -131,6 +138,7 @@ desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore`
 desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
 desc "---"
 lane :build_ipa do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
 	env = options[:env]
@@ -181,6 +189,7 @@ desc "* **`code`**: Project Code for any lane options config in config.json."
 desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
 desc "---"
 lane :upload_appcenter do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	env = options[:env]
 	config = get_config(code: code)
@@ -224,6 +233,7 @@ desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore`
 desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
 desc "---"
 lane :upload_filemanager do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
 	env = options[:env]
@@ -254,6 +264,7 @@ desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore`
 desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
 desc "---"
 lane :upload_appstore do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
 	env = options[:env]
@@ -283,6 +294,7 @@ desc "#### Options"
 desc "* **`branch`**: Target branch to pull."
 desc "---"
 lane :git_checkout do |options|
+	puts "-options: #{options}"
 	branch = options[:branch]
 
 	sh("git reset --hard HEAD")
@@ -302,6 +314,7 @@ desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcod
 desc "* **`branch`**: Target branch to push."
 desc "---"
 lane :git_commit_build do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
 	env = options[:env]
@@ -336,20 +349,21 @@ desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcod
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :beta_appcenter do |options|	
+	puts "-options: #{options}"
 	code = options[:code]
 	env = options[:env]
 	branch = options[:branch]
 	config = get_config(code: code)
 
-	git_checkout(branch: branch)
+	# git_checkout(branch: branch)
 	
 	bump_build_number(code: code)
 
 	build_ipa(code: code, export_method: "adhoc", env: env)
 
-	upload_appcenter(code: code, env: env)
+	upload_appcenter(code: code, export_method: "adhoc", env: env)
 
-	git_commit_build(code: code, env: env, branch: branch, message: "beta_appcenter")
+	# git_commit_build(code: code, env: env, branch: branch, message: "beta_appcenter")
 
 end
 
@@ -362,20 +376,21 @@ desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcod
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :beta_filemanager do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	env = options[:env]
 	branch = options[:branch]
 	config = get_config(code: code)
 
-	git_checkout(branch: branch)
+	# git_checkout(branch: branch)
 	
 	bump_build_number(code: code)
 
 	build_ipa(code: code, export_method: "adhoc", env: env)
 
-	upload_filemanager(code: code, env: env)
+	upload_filemanager(code: code, export_method: "adhoc", env: env)
 
-	git_commit_build(code: code, env: env, branch: branch, message: "beta_filemanager")
+	# git_commit_build(code: code, env: env, branch: branch, message: "beta_filemanager")
 end
 
 desc "Builds an App Store IPA and upload to File Manager"
@@ -387,18 +402,19 @@ desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcod
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :release_filemanager do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	env = options[:env]
 	branch = options[:branch]
 	config = get_config(code: code)
 
-	git_checkout(branch: branch)
+	# git_checkout(branch: branch)
 
 	build_ipa(code: code, export_method: "appstore", env: env)
 
-	upload_filemanager(code: code, env: env)
+	upload_filemanager(code: code, export_method: "appstore", env: env)
 
-	git_commit_build(code: code, env: env, branch: branch, message: "release_filemanager")
+	# git_commit_build(code: code, env: env, branch: branch, message: "release_filemanager")
 end
 
 desc "Builds an App Store IPA and upload to App Store"
@@ -410,18 +426,19 @@ desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcod
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :release_appstore do |options|
+	puts "-options: #{options}"
 	code = options[:code]
 	env = options[:env]
 	branch = options[:branch]
 	config = get_config(code: code)
 
-	git_checkout(branch: branch)
+	# git_checkout(branch: branch)
 
 	build_ipa(code: code, export_method: "appstore", env: env)
 
-	upload_appstore(code: code, env: env)
+	upload_appstore(code: code, export_method: "appstore", env: env)
 
-	git_commit_build(code: code, env: env, branch: branch, message: "release_appstore")
+	# git_commit_build(code: code, env: env, branch: branch, message: "release_appstore")
 end
 
 ################################################################################ Tests ################################################################################
@@ -432,5 +449,6 @@ desc "#### Options"
 desc "* Any options"
 desc "---"
 lane :test do |options|
+	puts "-options: #{options}"
 	# Testing
 end

@@ -1,27 +1,27 @@
 {
-    "appcenter_upload": {
-        "api_token": "ef204a28da33715e668b7d83897d5f3e27094266",
-        "app_name": "AAWallpaper",
-        "owner_name": "chris.so",
-        "owner_type": "user"
+  "appcenter_upload": {
+    "api_token": "ef204a28da33715e668b7d83897d5f3e27094266",
+    "app_name": "AAWallpaper",
+    "owner_name": "chris.so",
+    "owner_type": "user"
+  },
+  "build": {
+    "scheme": "AAWallpaper",
+    "workspace": "AAWallpaper.xcworkspace",
+    "xcodeproj": "AAWallpaper.xcodeproj"
+  },
+  "env": {
+    "DEV": {
+      "configuration": "Development"
     },
-    "build": {
-        "scheme": "AAWallpaper",
-        "workspace": "AAWallpaper.xcworkspace",
-        "xcodeproj": "AAWallpaper.xcodeproj"
+    "PRO": {
+      "configuration": "Release"
     },
-    "env": {
-        "DEV": {
-            "configuration": "Development"
-        },
-        "PRO": {
-            "configuration": "Release"
-        },
-        "UAT": {
-            "configuration": "Release"
-        }
-    },
-    "filemanager": {
-        "url": "http://10.3.2.1/diva/iphoneota/upload.php"
+    "UAT": {
+      "configuration": "Release"
     }
+  },
+  "filemanager": {
+    "url": "http://10.3.2.1/diva/iphoneota/upload.php"
+  }
 }
