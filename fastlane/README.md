@@ -12,32 +12,103 @@ Install _fastlane_ using
 ```
 [sudo] gem install fastlane -NV
 ```
-or alternatively using `brew cask install fastlane`
+or alternatively using `brew install fastlane`
 
 # Available Actions
-### get_config
+### get_target_name
 ```
-fastlane get_config
+fastlane get_target_name
 ```
-Gets config info from config.json
+Gets target name from code
 
 #### Example:
 
 ```
-bundle exec fastlane get_config code:default
+bundle exec fastlane get_target_name code:build/default/uat
 ```
 
 ```
-bundle exec fastlane get_config code:build
+bundle exec fastlane get_target_name code:build/default/uat
 ```
 
 ```
-bundle exec fastlane get_config code:build-default
+bundle exec fastlane get_target_name code:build/default/uat/build_for_uat
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
+
+---
+### get_env_name
+```
+fastlane get_env_name
+```
+Gets env name from code
+
+#### Example:
+
+```
+bundle exec fastlane get_env_name code:build/default/uat
+```
+
+```
+bundle exec fastlane get_env_name code:build/default/uat/build_for_uat
+```
+
+#### Options
+
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
+
+---
+### get_config_info
+```
+fastlane get_config_info
+```
+Gets config info from info.json
+
+#### Example:
+
+```
+bundle exec fastlane get_config_info code:build/default/uat
+```
+
+```
+bundle exec fastlane get_config_info code:build/default/uat/build_for_uat
+```
+
+```
+bundle exec fastlane get_config_info code:build/ABCI
+```
+
+#### Options
+
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
+
+---
+### get_build_info
+```
+fastlane get_build_info
+```
+Gets build info from info.json
+
+#### Example:
+
+```
+bundle exec fastlane get_build_info code:build/default/uat
+```
+
+```
+bundle exec fastlane get_build_info code:build/default/uat/build_for_uat
+```
+
+```
+bundle exec fastlane get_build_info code:build/ABCI
+```
+
+#### Options
+
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 ---
 ### generate_export_method
@@ -61,17 +132,17 @@ bundle exec fastlane generate_export_method export_method:adhoc
 ```
 fastlane bump_build_number
 ```
-Bumps a build number
+Bumps a build number **`NOT IN USED, since it does not support multiple targets`**
 
 #### Example:
 
 ```
-bundle exec fastlane bump_build_number code:default
+bundle exec fastlane bump_build_number code:build/default/uat
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 ---
 ### generate_build_name
@@ -83,16 +154,16 @@ Generate a build name
 #### Example:
 
 ```
-bundle exec fastlane generate_build_name code:default export_method:adhoc env:PRO
+bundle exec fastlane generate_build_name code:build/default/uat export_method:adhoc
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode.
 
-* **`env`**: last name component.
+* **`ipa_suffix`**: last name component.
 
 ---
 ### build_ipa
@@ -104,16 +175,14 @@ Builds an IPA
 #### Example:
 
 ```
-bundle exec fastlane build_ipa code:default export_method:adhoc env:PRO
+bundle exec fastlane build_ipa code:build/default/uat export_method:adhoc
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
 
 ---
 ### upload_appcenter
@@ -125,14 +194,12 @@ Uploads an IPA to App Center
 #### Example:
 
 ```
-bundle exec fastlane upload_appcenter code:default env:PRO
+bundle exec fastlane upload_appcenter code:build/default/uat
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 ---
 ### upload_filemanager
@@ -148,16 +215,14 @@ Simulate a curl call to file manager server:
 #### Example:
 
 ```
-bundle exec fastlane upload_filemanager code:default export_method:adhoc env:PRO
+bundle exec fastlane upload_filemanager code:build/default/uat export_method:adhoc
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
 
 ---
 ### upload_appstore
@@ -169,23 +234,21 @@ Uploads an IPA to App Store
 #### Example:
 
 ```
-bundle exec fastlane upload_appstore code:default export_method:appstore env:PRO
+bundle exec fastlane upload_appstore code:build/default/uat export_method:appstore
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
 
 ---
 ### git_checkout
 ```
 fastlane git_checkout
 ```
-Fetch remote and checkout out target branch
+Fetch remote and checkout out target branch **`NOT IN USED, since Gitlab supported`**
 
 #### Example:
 
@@ -202,19 +265,17 @@ bundle exec fastlane git_checkout branch:develop
 ```
 fastlane git_commit_build
 ```
-Commit bump build number message push to remote
+Commit bump build number message push to remote **`NOT IN USED, since it change create too many commits`**
 
 #### Example:
 
 ```
-bundle exec fastlane git_commit_build code:default export_method:adhoc env:PRO branch:develop
+bundle exec fastlane git_commit_build code:build/default/uat export_method:adhoc branch:develop
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`branch`**: Target branch to push.
 
@@ -228,14 +289,12 @@ Builds an Ad Hoc IPA and upload to App Center
 #### Example:
 
 ```
-bundle exec fastlane beta_appcenter code:default env:PRO branch:develop
+bundle exec fastlane beta_appcenter code:build/default/uat branch:develop
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`branch`**: Target branch to pull and push.
 
@@ -249,14 +308,12 @@ Builds an Ad Hoc IPA and upload to File Manager
 #### Example:
 
 ```
-bundle exec fastlane beta_filemanager code:default env:PRO branch:develop
+bundle exec fastlane beta_filemanager code:build/default/uat branch:develop
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`branch`**: Target branch to pull and push.
 
@@ -270,14 +327,12 @@ Builds an App Store IPA and upload to File Manager
 #### Example:
 
 ```
-bundle exec fastlane release_filemanager code:default env:PRO branch:develop
+bundle exec fastlane release_filemanager code:build/default/uat branch:develop
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`branch`**: Target branch to pull and push.
 
@@ -291,14 +346,12 @@ Builds an App Store IPA and upload to App Store
 #### Example:
 
 ```
-bundle exec fastlane release_appstore code:default env:PRO branch:develop
+bundle exec fastlane release_appstore code:build/default/uat branch:develop
 ```
 
 #### Options
 
-* **`code`**: Project Code for any lane options config in config.json.
-
-* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode.
+* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
 
 * **`branch`**: Target branch to pull and push.
 

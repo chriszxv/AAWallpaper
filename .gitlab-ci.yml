@@ -12,114 +12,114 @@
 # detail on what to keep in mind in this scenario.
 
 stages:
-    - build_beta_uat
-    - upload_beta_uat
-    - build_beta
-    - upload_beta
-    - build_release
-    - upload_release
+  - build_beta_uat
+  - upload_beta_uat
+  - build_beta
+  - upload_beta
+  - build_release
+  - upload_release
 
 variables:
-    LC_ALL: 'en_US.UTF-8'
-    LANG: 'en_US.UTF-8'
-    GIT_STRATEGY: fetch
-    GIT_SUBMODULE_STRATEGY: recursive
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+  GIT_STRATEGY: fetch
+  GIT_SUBMODULE_STRATEGY: recursive
 
 before_script:
-    - bundle install
+  - bundle install
 
 build_beta_uat_ipa:
-    stage: build_beta_uat
-    script:
-        - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:adhoc env:UAT
-    artifacts:
-        paths:
-            - builds/*
-    environment:
-        name: uat_review
-    only:
-        - /^build/uat.*$/
-    tags:
-        - ios
+  stage: build_beta_uat
+  script:
+    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:adhoc env:UAT
+  artifacts:
+    paths:
+      - builds/*
+  environment:
+    name: uat_review
+  only:
+    - /^build/.*/.*/.*$ # build/default/ANY_BUILD_JSON_NAME/ANY_BRANCH_NAME
+  tags:
+    - ios
 
 upload_beta_uat_filemanager:
-    stage: upload_beta_uat
-    script:
-        - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:adhoc env:UAT
-    dependencies:
-        - build_beta_uat_ipa
-    environment:
-        name: uat_review
-    only:
-        - /^build/uat.*$/
-    tags:
-        - ios
+  stage: upload_beta_uat
+  script:
+    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:adhoc env:UAT
+  dependencies:
+    - build_beta_uat_ipa
+  environment:
+    name: uat_review
+  only:
+    - /^build/.*/.*/.*$ # build/default/ANY_BUILD_JSON_NAME/ANY_BRANCH_NAME
+  tags:
+    - ios
 
 build_beta_ipa:
-    stage: build_beta
-    script:
-        - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:adhoc env:PRO
-    artifacts:
-        paths:
-            - builds/*
-    environment:
-        name: uat_review
-    only:
-        - /^build/pro.*$/
-    tags:
-        - ios
+  stage: build_beta
+  script:
+    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:adhoc env:PRO
+  artifacts:
+    paths:
+      - builds/*
+  environment:
+    name: uat_review
+  only:
+    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+  tags:
+    - ios
 
 upload_beta_filemanager:
-    stage: upload_beta
-    script:
-        - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:adhoc env:PRO
-    dependencies:
-        - build_beta_ipa
-    environment:
-        name: uat_review
-    only:
-        - /^build/pro.*$/
-    tags:
-        - ios
+  stage: upload_beta
+  script:
+    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:adhoc env:PRO
+  dependencies:
+    - build_beta_ipa
+  environment:
+    name: uat_review
+  only:
+    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+  tags:
+    - ios
 
 build_release_ipa:
-    stage: build_release
-    script:
-        - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
-    artifacts:
-        paths:
-            - builds/*
-    environment:
-        name: production
-    when: manual
-    allow_failure: false
-    only:
-        - /^build/pro.*$/
-    tags:
-        - ios
+  stage: build_release
+  script:
+    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
+  artifacts:
+    paths:
+      - builds/*
+  environment:
+    name: production
+  when: manual
+  allow_failure: false
+  only:
+    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+  tags:
+    - ios
 
 upload_release_filemanager:
-    stage: upload_release
-    script:
-        - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
-    dependencies:
-        - build_release_ipa
-    environment:
-        name: production
-    only:
-        - /^build/pro.*$/
-    tags:
-        - ios
+  stage: upload_release
+  script:
+    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
+  dependencies:
+    - build_release_ipa
+  environment:
+    name: production
+  only:
+    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+  tags:
+    - ios
 
 upload_release_appstore:
-    stage: upload_release
-    script:
-        - bundle exec fastlane upload_appstore code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
-    dependencies:
-        - build_release_ipa
-    environment:
-        name: production
-    only:
-        - /^build/pro.*$/
-    tags:
-        - ios
+  stage: upload_release
+  script:
+    - bundle exec fastlane upload_appstore code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
+  dependencies:
+    - build_release_ipa
+  environment:
+    name: production
+  only:
+    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+  tags:
+    - ios

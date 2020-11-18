@@ -6,20 +6,8 @@
     "owner_type": "user"
   },
   "build": {
-    "scheme": "AAWallpaper",
     "workspace": "AAWallpaper.xcworkspace",
     "xcodeproj": "AAWallpaper.xcodeproj"
-  },
-  "env": {
-    "DEV": {
-      "configuration": "Development"
-    },
-    "PRO": {
-      "configuration": "Release"
-    },
-    "UAT": {
-      "configuration": "Release"
-    }
   },
   "filemanager": {
     "url": "http://10.3.2.1/diva/iphoneota/upload.php"

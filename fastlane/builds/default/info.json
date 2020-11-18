@@ -1,0 +1,17 @@
+{
+  "pro": {
+    "scheme": "AAWallpaper",
+    "configuration": "Release",
+    "ipa_suffix": "PRO"
+  },
+  "uat": {
+    "scheme": "AAWallpaper",
+    "configuration": "Release",
+    "ipa_suffix": "UAT"
+  },
+  "dev": {
+    "scheme": "AAWallpaper",
+    "configuration": "Release",
+    "ipa_suffix": "DEV"
+  }
+}

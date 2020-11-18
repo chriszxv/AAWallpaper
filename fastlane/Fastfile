@@ -16,35 +16,106 @@
 default_platform(:ios)
 
 ################################################################################ Helpers ################################################################################
-desc "Gets config info from config.json"
+desc "Gets target name from code"
 desc "#### Example:"
-desc "```\nbundle exec fastlane get_config code:default\n```"
-desc "```\nbundle exec fastlane get_config code:build\n```"
-desc "```\nbundle exec fastlane get_config code:build-default\n```"
+desc "```\nbundle exec fastlane get_target_name code:build/default/uat\n```"
+desc "```\nbundle exec fastlane get_target_name code:build/default/uat\n```"
+desc "```\nbundle exec fastlane get_target_name code:build/default/uat/build_for_uat\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "---"
-lane :get_config do |options|
+lane :get_target_name do |options|
 	puts "-options: #{options}"
 	code = options[:code]
 
-	# if code == "build"
-	#  	code = "default"
-	# else
-	# 	code = code.delete_prefix("build-") # "build-CODE" -> "CODE"
-	# end
-	code = code.split('/').last # build/beta/default -> default
-	puts "-code: #{code}"
+	# build/default/uat -> uat
+	# build/default/uat/build_for_uat -> uat
+	strings = code.split('/')
+	if strings.count > 1
+	target_name = strings[1]
+	else
+		UI.user_error!("target_name not found in code: #{code}")
+	end
+	puts "-target_name: #{target_name}"
+	target_name
+end
 
-	config_path = "configs/#{code}/config.json"
-	puts "-config_path: #{config_path}"
+desc "Gets env name from code"
+desc "#### Example:"
+desc "```\nbundle exec fastlane get_env_name code:build/default/uat\n```"
+desc "```\nbundle exec fastlane get_env_name code:build/default/uat/build_for_uat\n```"
+desc "#### Options"
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
+desc "---"
+lane :get_env_name do |options|
+	puts "-options: #{options}"
+	code = options[:code]
 
-	config_file = File.read(config_path)
-	config = JSON.parse(config_file)
+	# build/default/uat -> uat
+	# build/default/uat/build_for_uat -> uat
+	strings = code.split('/')
+	if strings.count > 2
+	env_name = strings[2]
+	else
+		UI.user_error!("env name not found in code: #{code}")
+	end
+	puts "-env_name: #{env_name}"
+	env_name
+end
 
-	puts "get_config:"
-	puts "-config: #{config}"
-	config
+desc "Gets config info from info.json"
+desc "#### Example:"
+desc "```\nbundle exec fastlane get_config_info code:build/default/uat\n```"
+desc "```\nbundle exec fastlane get_config_info code:build/default/uat/build_for_uat\n```"
+desc "```\nbundle exec fastlane get_config_info code:build/ABCI\n```"
+desc "#### Options"
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
+desc "---"
+lane :get_config_info do |options|
+	puts "-options: #{options}"
+	code = options[:code]
+
+	target_name = get_target_name(code: code)
+	puts "-target_name: #{target_name}"
+
+	config_info_path = "configs/#{target_name}/info.json"
+	puts "-config_info_path: #{config_info_path}"
+
+	config_info_file = File.read(config_info_path)
+	config_info = JSON.parse(config_info_file)
+
+	puts "get_config_info:"
+	puts "-config_info: #{config_info}"
+	config_info
+end
+
+desc "Gets build info from info.json"
+desc "#### Example:"
+desc "```\nbundle exec fastlane get_build_info code:build/default/uat\n```"
+desc "```\nbundle exec fastlane get_build_info code:build/default/uat/build_for_uat\n```"
+desc "```\nbundle exec fastlane get_build_info code:build/ABCI\n```"
+desc "#### Options"
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
+desc "---"
+lane :get_build_info do |options|
+	puts "-options: #{options}"
+	code = options[:code]
+
+	target_name = get_target_name(code: code)
+	puts "-target_name: #{target_name}"
+
+	env_name = get_env_name(code: code)
+	puts "-env_name: #{env_name}"
+
+	build_info_path = "builds/#{target_name}/info.json"
+	puts "-build_info_path: #{build_info_path}"
+
+	build_info_file = File.read(build_info_path)
+	build_info = JSON.parse(build_info_file)
+	build_info = build_info[env_name]
+	puts "get_build_info:"
+	puts "-build_info: #{build_info}"
+	build_info
 end
 
 desc "Generate an export method"
@@ -72,16 +143,18 @@ lane :generate_export_method do |options|
 	export_method
 end
 
-desc "Bumps a build number"
+desc "Bumps a build number **`NOT IN USED, since it does not support multiple targets`**"
 desc "#### Example:"
-desc "```\nbundle exec fastlane bump_build_number code:default\n```"
+desc "```\nbundle exec fastlane bump_build_number code:build/default/uat\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "---"
 lane :bump_build_number do |options|
+	UI.user_error!("This lane is not in used.")
+
 	puts "-options: #{options}"
 	code = options[:code]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	xcodeproj = config["build"]["xcodeproj"]
 
@@ -96,32 +169,31 @@ end
 
 desc "Generate a build name"
 desc "#### Example:"
-desc "```\nbundle exec fastlane generate_build_name code:default export_method:adhoc env:PRO\n```"
+desc "```\nbundle exec fastlane generate_build_name code:build/default/uat export_method:adhoc\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode."
-desc "* **`env`**: last name component."
+desc "* **`ipa_suffix`**: last name component."
 desc "---"
 lane :generate_build_name do |options|
 	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
-	env = options[:env]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
+	build_info = get_build_info(code: code)
 
 	xcodeproj = config["build"]["xcodeproj"]
-	app_name = config["build"]["scheme"]
-
+	scheme = build_info["scheme"]
+	ipa_suffix = build_info["ipa_suffix"]
 	puts "-xcodeproj: #{xcodeproj}"
-	puts "-app_name: #{app_name}"
+	puts "-scheme: #{scheme}"
 
 	version = get_version_number(
 		xcodeproj: xcodeproj,
-		target: app_name
+		target: scheme
 	)
-		build_number = get_build_number(xcodeproj: xcodeproj)
 
-	build_name = "#{app_name}.v#{version}.b#{build_number}.#{export_method}.#{env}.ipa"
+	build_name = "#{scheme}.v#{version}.#{export_method}.#{ipa_suffix}.ipa"
 
 	puts "generate_build_name:"
 	puts "-build_name: #{build_name}"
@@ -131,37 +203,34 @@ end
 ################################################################################ Builds ################################################################################
 desc "Builds an IPA"
 desc "#### Example:"
-desc "```\nbundle exec fastlane build_ipa code:default export_method:adhoc env:PRO\n```"
+desc "```\nbundle exec fastlane build_ipa code:build/default/uat export_method:adhoc\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
 desc "---"
 lane :build_ipa do |options|
 	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
-	env = options[:env]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
+	build_info = get_build_info(code: code)
+	target_name = get_target_name(code: code)
 
-	configuration = config["env"][env]["configuration"]
 	workspace = config["build"]["workspace"]
-	scheme = config["build"]["scheme"]
-	code = code.split('/').last # build/beta/default -> default
-	export_options = "fastlane/configs/#{code}/#{export_method}.plist"
+	scheme = build_info["scheme"]
+	configuration = build_info["configuration"]
+	export_options = "fastlane/configs/#{target_name}/#{export_method}.plist"
 	puts "build_ipa:"
 	puts "-config: #{config}"
-	puts "-env: #{env}"
-	puts "-configuration: #{configuration}"
 	puts "-workspace: #{workspace}"
 	puts "-scheme: #{scheme}"
+	puts "-configuration: #{configuration}"
 	puts "-export_method: #{export_method}"
 	puts "-export_options: #{export_options}"
 
 	build_name = generate_build_name(
 		code: code,
-		export_method: export_method,
-		env: env
+		export_method: export_method
 	)
 
 	cocoapods(podfile: "Podfile")
@@ -183,16 +252,14 @@ end
 ################################################################################ Uploads ################################################################################
 desc "Uploads an IPA to App Center"
 desc "#### Example:"
-desc "```\nbundle exec fastlane upload_appcenter code:default env:PRO\n```"
+desc "```\nbundle exec fastlane upload_appcenter code:build/default/uat\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "---"
 lane :upload_appcenter do |options|
 	puts "-options: #{options}"
 	code = options[:code]
-	env = options[:env]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	api_token = config["appcenter_upload"]["api_token"]
 	app_name = config["appcenter_upload"]["app_name"]
@@ -201,7 +268,6 @@ lane :upload_appcenter do |options|
 
 	puts "upload_appcenter:"
 	puts "-config: #{config}"
-	puts "-env: #{env}"
 	puts "-api_token: #{api_token}"
 	puts "-app_name: #{app_name}"
 	puts "-owner_name: #{owner_name}"
@@ -209,8 +275,7 @@ lane :upload_appcenter do |options|
 
 	build_name = generate_build_name(
 		code: code,
-		export_method: export_method,
-		env: env
+		export_method: export_method
 	)
 
 	appcenter_upload(
@@ -226,18 +291,16 @@ desc "Uploads an IPA to File Manager"
 desc "Simulate a curl call to file manager server:"
 desc "`curl -F file0=@../builds/CODE.v1.1.0.b45.PRO.ipa https://10.3.2.1/diva/filemanager/upload.php`"
 desc "#### Example:"
-desc "```\nbundle exec fastlane upload_filemanager code:default export_method:adhoc env:PRO\n```"
+desc "```\nbundle exec fastlane upload_filemanager code:build/default/uat export_method:adhoc\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
 desc "---"
 lane :upload_filemanager do |options|
 	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
-	env = options[:env]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	url = config["filemanager"]["url"]
 
@@ -245,9 +308,8 @@ lane :upload_filemanager do |options|
 	puts "-url: #{url}"
 
 	build_name = generate_build_name(
-		code: code,
-		export_method: export_method,
-		env: env
+		code: code, 
+		export_method: export_method
 	)
 
 	# sh = sh("pwd") // debug
@@ -257,25 +319,22 @@ end
 
 desc "Uploads an IPA to App Store"
 desc "#### Example:"
-desc "```\nbundle exec fastlane upload_appstore code:default export_method:appstore env:PRO\n```"
+desc "```\nbundle exec fastlane upload_appstore code:build/default/uat export_method:appstore\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
 desc "---"
 lane :upload_appstore do |options|
 	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
-	env = options[:env]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	puts "upload_appstore:"
 
 	build_name = generate_build_name(
-		code: code,
-		export_method: export_method,
-		env: env
+		code: code, 
+		export_method: export_method
 	)
 
 	deliver(
@@ -287,13 +346,15 @@ lane :upload_appstore do |options|
 end
 
 ################################################################################ Gits ################################################################################
-desc "Fetch remote and checkout out target branch"
+desc "Fetch remote and checkout out target branch **`NOT IN USED, since Gitlab supported`**"
 desc "#### Example:"
 desc "```\nbundle exec fastlane git_checkout branch:develop\n```"
 desc "#### Options"
 desc "* **`branch`**: Target branch to pull."
 desc "---"
 lane :git_checkout do |options|
+	UI.user_error!("This lane is not in used.")
+
 	puts "-options: #{options}"
 	branch = options[:branch]
 
@@ -305,29 +366,28 @@ lane :git_checkout do |options|
 	sh("git reset --hard #{branch}")
 end
 
-desc "Commit bump build number message push to remote"
+desc "Commit bump build number message push to remote **`NOT IN USED, since it change create too many commits`**"
 desc "#### Example:"
-desc "```\nbundle exec fastlane git_commit_build code:default export_method:adhoc env:PRO branch:develop\n```"
+desc "```\nbundle exec fastlane git_commit_build code:build/default/uat export_method:adhoc branch:develop\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`branch`**: Target branch to push."
 desc "---"
 lane :git_commit_build do |options|
+	UI.user_error!("This lane is not in used.")
+
 	puts "-options: #{options}"
 	code = options[:code]
 	export_method = options[:export_method]
-	env = options[:env]
 	branch = options[:branch]
 	message = options[:message]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	xcodeproj = config["build"]["xcodeproj"]
 	
 	build_name = generate_build_name(
-		code: code,
-		export_method: export_method,
-		env: env
+		code: code, 
+		export_method: export_method
 	)
 
 	commit_version_bump(
@@ -342,103 +402,119 @@ end
 ################################################################################ Jobs ################################################################################
 desc "Builds an Ad Hoc IPA and upload to App Center"
 desc "#### Example:"
-desc "```\nbundle exec fastlane beta_appcenter code:default env:PRO branch:develop\n```"
+desc "```\nbundle exec fastlane beta_appcenter code:build/default/uat branch:develop\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :beta_appcenter do |options|	
 	puts "-options: #{options}"
 	code = options[:code]
-	env = options[:env]
 	branch = options[:branch]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	# git_checkout(branch: branch)
 	
-	bump_build_number(code: code)
+	# bump_build_number(code: code)
 
-	build_ipa(code: code, export_method: "adhoc", env: env)
+	build_ipa(
+		code: code, 
+		export_method: "adhoc"
+	)
 
-	upload_appcenter(code: code, export_method: "adhoc", env: env)
+	upload_appcenter(
+		code: code, 
+		export_method: "adhoc"
+	)
 
-	# git_commit_build(code: code, env: env, branch: branch, message: "beta_appcenter")
+	# git_commit_build(code: code, branch: branch, message: "beta_appcenter")
 
 end
 
 desc "Builds an Ad Hoc IPA and upload to File Manager"
 desc "#### Example:"
-desc "```\nbundle exec fastlane beta_filemanager code:default env:PRO branch:develop\n```"
+desc "```\nbundle exec fastlane beta_filemanager code:build/default/uat branch:develop\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :beta_filemanager do |options|
 	puts "-options: #{options}"
 	code = options[:code]
-	env = options[:env]
 	branch = options[:branch]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	# git_checkout(branch: branch)
 	
-	bump_build_number(code: code)
+	# bump_build_number(code: code)
 
-	build_ipa(code: code, export_method: "adhoc", env: env)
+	build_ipa(
+		code: code, 
+		export_method: "adhoc"
+	)
 
-	upload_filemanager(code: code, export_method: "adhoc", env: env)
+	upload_filemanager(
+		code: code, 
+		export_method: "adhoc"
+	)
 
-	# git_commit_build(code: code, env: env, branch: branch, message: "beta_filemanager")
+	# git_commit_build(code: code, branch: branch, message: "beta_filemanager")
 end
 
 desc "Builds an App Store IPA and upload to File Manager"
 desc "#### Example:"
-desc "```\nbundle exec fastlane release_filemanager code:default env:PRO branch:develop\n```"
+desc "```\nbundle exec fastlane release_filemanager code:build/default/uat branch:develop\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :release_filemanager do |options|
 	puts "-options: #{options}"
 	code = options[:code]
-	env = options[:env]
 	branch = options[:branch]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	# git_checkout(branch: branch)
 
-	build_ipa(code: code, export_method: "appstore", env: env)
+	build_ipa(
+		code: code, 
+		export_method: "appstore"
+	)
 
-	upload_filemanager(code: code, export_method: "appstore", env: env)
+	upload_filemanager(
+		code: code, 
+		export_method: "appstore"
+	)
 
-	# git_commit_build(code: code, env: env, branch: branch, message: "release_filemanager")
+	# git_commit_build(code: code, branch: branch, message: "release_filemanager")
 end
 
 desc "Builds an App Store IPA and upload to App Store"
 desc "#### Example:"
-desc "```\nbundle exec fastlane release_appstore code:default env:PRO branch:develop\n```"
+desc "```\nbundle exec fastlane release_appstore code:build/default/uat branch:develop\n```"
 desc "#### Options"
-desc "* **`code`**: Project Code for any lane options config in config.json."
-desc "* **`env`**: Enviroment: `DEV` / `UAT` / `PRO` build configuration in Xcode."
+desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
 desc "* **`branch`**: Target branch to pull and push."
 desc "---"
 lane :release_appstore do |options|
 	puts "-options: #{options}"
 	code = options[:code]
-	env = options[:env]
 	branch = options[:branch]
-	config = get_config(code: code)
+	config = get_config_info(code: code)
 
 	# git_checkout(branch: branch)
 
-	build_ipa(code: code, export_method: "appstore", env: env)
+	build_ipa(
+		code: code, 
+		export_method: "appstore"
+	)
 
-	upload_appstore(code: code, export_method: "appstore", env: env)
+	upload_appstore(
+		code: code, 
+		export_method: "appstore"
+	)
 
-	# git_commit_build(code: code, env: env, branch: branch, message: "release_appstore")
+	# git_commit_build(code: code, branch: branch, message: "release_appstore")
 end
 
 ################################################################################ Tests ################################################################################
