@@ -1,20 +1,20 @@
 PODS:
-  - DeviceKit (2.3.0)
-  - RxCocoa (5.0.1):
+  - DeviceKit (4.2.1)
+  - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxGesture (3.0.1):
-    - RxCocoa (~> 5.0)
-    - RxSwift (~> 5.0)
-  - RxRelay (5.0.1):
+  - RxGesture (3.0.2):
+    - RxCocoa (~> 5.1)
+    - RxSwift (~> 5.1)
+  - RxRelay (5.1.1):
     - RxSwift (~> 5)
-  - RxSwift (5.0.1)
+  - RxSwift (5.1.1)
 
 DEPENDENCIES:
-  - DeviceKit (= 2.3.0)
-  - RxCocoa (= 5.0.1)
-  - RxGesture (= 3.0.1)
-  - RxSwift (= 5.0.1)
+  - DeviceKit (= 4.2.1)
+  - RxCocoa (= 5.1.1)
+  - RxGesture (= 3.0.2)
+  - RxSwift (= 5.1.1)
 
 SPEC REPOS:
   trunk:
@@ -25,12 +25,12 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
-  DeviceKit: da103891aa928d89f64ea8dd8aca738c5f3d8ac0
-  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
-  RxGesture: a3f8dd6adf078110ed5e1c9c30d09d705a09852e
-  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
-  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+  DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 7a89b0554614b9d87811965e7a05d8c0d0a43ac0
+PODFILE CHECKSUM: 3b99ca65adf0e1fc1dc613abe008ed2beaac05d2
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0
