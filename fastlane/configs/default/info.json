@@ -11,5 +11,8 @@
   },
   "filemanager": {
     "url": "http://10.3.2.1/diva/iphoneota/upload.php"
+  },
+  "deliver": {
+    "username": "chris.so@aastocks.com"
   }
 }

@@ -30,7 +30,7 @@ lane :get_target_name do |options|
 
 	# build/default/uat -> uat
 	# build/default/uat/build_for_uat -> uat
-	strings = code.split('/')
+	strings = code.split("/")
 	if strings.count > 1
 	target_name = strings[1]
 	else
@@ -53,7 +53,7 @@ lane :get_env_name do |options|
 
 	# build/default/uat -> uat
 	# build/default/uat/build_for_uat -> uat
-	strings = code.split('/')
+	strings = code.split("/")
 	if strings.count > 2
 	env_name = strings[2]
 	else
@@ -337,16 +337,20 @@ lane :upload_appstore do |options|
 
 	puts "upload_appstore:"
 
+	username = config["deliver"]["username"]
+
 	build_name = generate_build_name(
 		code: code, 
 		export_method: export_method
 	)
 
 	deliver(
-		force: true, # Skip HTMl report verification
+		skip_screenshots: true,
+		ipa: "builds/#{build_name}",
+		username: username,
 		skip_metadata: true,
 		skip_screenshots: true,
-		ipa: "builds/#{build_name}"
+		force: true # Skip HTMl report verification
 	)
 end
 
