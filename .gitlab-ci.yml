@@ -11,13 +11,25 @@
 # https://docs.gitlab.com/runner/security/#usage-of-shell-executor for additional
 # detail on what to keep in mind in this scenario.
 
+########################################################################################################################################
+# Pipelines:
+#                                                       [build_adhoc]         [upload_adhoc]                        [build_appstore]         [upload_appstore]
+#
+# build/ANY_CONFIG_NAME/pro/ANY_BRANCH_NAME:            (build_adhoc_ipa)  →  (upload_adhoc_ipa_to_filemanager)  →  (build_appstore_ipa)  →  (upload_appstore_ipa_to_filemanager)
+#                                                                                                                                         ↘  (upload_appstore_ipa_to_appstore)
+#
+# build/ANY_CONFIG_NAME/appcenter/ANY_BRANCH_NAME:      (build_adhoc_ipa)  →  (upload_adhoc_ipa_to_filemanager)
+#                                                                          ↘  (upload_adhoc_ipa_to_appcenter)
+#
+# build/ANY_CONFIG_NAME/ANY_BUILD_NAME/ANY_BRANCH_NAME: (build_adhoc_ipa)  →  (upload_adhoc_ipa_to_filemanager)
+#
+########################################################################################################################################
+
 stages:
-  - build_beta_uat
-  - upload_beta_uat
-  - build_beta
-  - upload_beta
-  - build_release
-  - upload_release
+  - build_adhoc
+  - upload_adhoc
+  - build_appstore
+  - upload_appstore
 
 variables:
   LC_ALL: "en_US.UTF-8"
@@ -28,98 +40,84 @@ variables:
 before_script:
   - bundle install
 
-build_beta_uat_ipa:
-  stage: build_beta_uat
+build_adhoc_ipa:
+  stage: build_adhoc
   script:
-    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:adhoc env:UAT
+    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:adhoc
   artifacts:
     paths:
       - builds/*
   environment:
-    name: uat_review
+    name: uat
   only:
-    - /^build/.*/.*/.*$ # build/default/ANY_BUILD_JSON_NAME/ANY_BRANCH_NAME
+    - /build\/.*\/.*\/.*$/ # build/ANY_CONFIG_NAME/ANY_BUILD_NAME/ANY_BRANCH_NAME
   tags:
     - ios
 
-upload_beta_uat_filemanager:
-  stage: upload_beta_uat
+upload_adhoc_ipa_to_filemanager:
+  stage: upload_adhoc
   script:
-    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:adhoc env:UAT
+    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:adhoc
   dependencies:
-    - build_beta_uat_ipa
+    - build_adhoc_ipa
   environment:
-    name: uat_review
+    name: uat
   only:
-    - /^build/.*/.*/.*$ # build/default/ANY_BUILD_JSON_NAME/ANY_BRANCH_NAME
+    - /build\/.*\/.*\/.*$/ # build/ANY_CONFIG_NAME/ANY_BUILD_NAME/ANY_BRANCH_NAME
   tags:
     - ios
 
-build_beta_ipa:
-  stage: build_beta
+upload_adhoc_ipa_to_appcenter:
+  stage: upload_adhoc
   script:
-    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:adhoc env:PRO
-  artifacts:
-    paths:
-      - builds/*
-  environment:
-    name: uat_review
-  only:
-    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
-  tags:
-    - ios
-
-upload_beta_filemanager:
-  stage: upload_beta
-  script:
-    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:adhoc env:PRO
+    - bundle exec fastlane upload_appcenter code:$CI_COMMIT_REF_NAME export_method:adhoc
   dependencies:
-    - build_beta_ipa
+    - build_adhoc_ipa
   environment:
-    name: uat_review
+    name: uat
   only:
-    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+    - /build\/.*\/appcenter\/.*$/ # build/ANY_CONFIG_NAME/appcenter/ANY_BRANCH_NAME
   tags:
     - ios
 
-build_release_ipa:
-  stage: build_release
+build_appstore_ipa:
+  stage: build_appstore
   script:
-    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
+    - bundle exec fastlane build_ipa code:$CI_COMMIT_REF_NAME export_method:appstore
   artifacts:
     paths:
       - builds/*
   environment:
-    name: production
+    name: pro
   when: manual
   allow_failure: false
   only:
-    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+    - /build\/.*\/pro/.*$/ # build/ANY_CONFIG_NAME/pro/ANY_BRANCH_NAME
   tags:
     - ios
 
-upload_release_filemanager:
-  stage: upload_release
+upload_appstore_ipa_to_filemanager:
+  stage: upload_appstore
   script:
-    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
+    - bundle exec fastlane upload_filemanager code:$CI_COMMIT_REF_NAME export_method:appstore
   dependencies:
-    - build_release_ipa
+    - build_appstore_ipa
   environment:
-    name: production
+    name: pro
   only:
-    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+    - /build\/.*\/pro/.*$/ # build/ANY_CONFIG_NAME/pro/ANY_BRANCH_NAME
   tags:
     - ios
 
-upload_release_appstore:
-  stage: upload_release
+upload_appstore_ipa_to_appstore:
+  stage: upload_appstore
   script:
-    - bundle exec fastlane upload_appstore code:$CI_COMMIT_REF_NAME export_method:appstore env:PRO
+    - bundle exec fastlane upload_appstore code:$CI_COMMIT_REF_NAME export_method:appstore
   dependencies:
-    - build_release_ipa
+    - build_appstore_ipa
   environment:
-    name: production
+    name: pro
   only:
-    - /^build/.*/pro/.*$ # build/default/pro/ANY_BRANCH_NAME
+    - /build\/.*\/pro/.*$/ # build/ANY_CONFIG_NAME/pro/ANY_BRANCH_NAME
   tags:
     - ios
