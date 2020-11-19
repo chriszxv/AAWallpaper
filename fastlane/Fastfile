@@ -252,13 +252,15 @@ end
 ################################################################################ Uploads ################################################################################
 desc "Uploads an IPA to App Center"
 desc "#### Example:"
-desc "```\nbundle exec fastlane upload_appcenter code:build/default/uat\n```"
+desc "```\nbundle exec fastlane upload_appcenter code:build/default/uat export_method:adhoc\n```"
 desc "#### Options"
 desc "* **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter."
+desc "* **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode."
 desc "---"
 lane :upload_appcenter do |options|
 	puts "-options: #{options}"
 	code = options[:code]
+	export_method = options[:export_method]
 	config = get_config_info(code: code)
 
 	api_token = config["appcenter_upload"]["api_token"]

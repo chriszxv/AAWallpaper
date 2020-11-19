@@ -194,12 +194,14 @@ Uploads an IPA to App Center
 #### Example:
 
 ```
-bundle exec fastlane upload_appcenter code:build/default/uat
+bundle exec fastlane upload_appcenter code:build/default/uat export_method:adhoc
 ```
 
 #### Options
 
 * **`code`**: Project code for any lane options in info.json inside configs / builds. In gitlab, we use branch name for this parameter.
+
+* **`export_method`**: Export method: `development` / `adhoc` / `appstore` build configuration in Xcode.
 
 ---
 ### upload_filemanager
