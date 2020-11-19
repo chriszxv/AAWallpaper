@@ -285,7 +285,10 @@ lane :upload_appcenter do |options|
 		app_name: app_name,
 		owner_name: owner_name,
 		owner_type: owner_type,
-		ipa: "builds/#{build_name}"
+		ipa: "builds/#{build_name}",
+		destinations: "*",
+		notify_testers: true,
+		release_notes: code
 	)
 end
 

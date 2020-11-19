@@ -4,6 +4,11 @@
     "configuration": "Release",
     "ipa_suffix": "PRO"
   },
+  "appcenter": {
+    "scheme": "AAWallpaper",
+    "configuration": "Release",
+    "ipa_suffix": "APP_CENTER"
+  },
   "uat": {
     "scheme": "AAWallpaper",
     "configuration": "Release",
